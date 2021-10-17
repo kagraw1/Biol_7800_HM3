@@ -1,0 +1,121 @@
+---
+title: "Homework_03"
+author: "Kirti Agrawal"
+date: "13/10/2021"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+##Question 1
+
+```{r}
+set.seed(12)
+x = runif(n = 1:500)
+A = matrix(x, nrow = 50, ncol = 10)
+y = colMeans(A)
+colnames(A) = paste("lake", 1:10, y, sep = "_")
+colnames(A)
+```
+
+
+
+```{r}
+set.seed(12)
+A = runif(n = 1:500)
+x = matrix(A, nrow = 50, ncol = 10)
+
+matrixMeans <- function(x)
+{
+  toReturn = numeric(ncol(x))
+  for(ii in 1:ncol(x))
+  {
+    count = 0
+    total = 0
+    avg = 0
+    for(jj in 1:nrow(x)){
+      total = total + x[jj, ii]
+      count = count + 1
+      avg = total/count
+    }
+    print(paste("lake Nitogen Concentration mean= ", avg))
+  }
+}
+
+matrixMeans(x)
+```
+
+
+## Question 2
+
+
+```{r}
+x = array(1:27, dim = c(3, 3, 3))
+x
+for (i in 1:3) {
+  for (j in 1:3) {
+    for (k in 1:3) {
+print(paste(x[i, j, k], sep = ','))      
+    }
+    
+  }
+  
+}
+```
+
+## Question3
+
+```{r}
+n <- 28
+x <- numeric(n)
+x[1] <- 0
+x[2] <- 1
+for (i in 3:n)
+{
+  x[i] <- x[i-1]+x[i-2] 
+}
+print(x)
+```
+
+
+## Question4
+
+```{r}
+library(stringr)
+top105 = readLines("http://www.textfiles.com/music/ktop100.txt")
+head(top105, n = 123)
+X = top105[-c(64, 65)]
+Y = str_extract(X, "\\d+\\.*\\d*")
+Z = Y[!is.na(Y)]
+x2 <- Z[!Z %in% 1:12]
+K = strsplit(x2, " ")[-c(1)]
+print(paste(K))
+```
+
+
+## Question5
+
+```{r}
+library(stringr)
+top105 = readLines("http://www.textfiles.com/music/ktop100.txt")
+X = top105[-c(64, 65)]
+Y = str_extract(X, "\\d+\\.*\\d*")
+Z = Y[!is.na(Y)]
+x2 <- Z[!Z %in% 1:12]
+K = strsplit(x2, " ")[-c(1)]
+print(paste(K))
+M = gsub('^\\.|\\.$', '', K)
+M
+numvec = as.numeric(M)
+numvec
+is.numeric(numvec)
+D = numvec[duplicated(numvec)]
+print(D)
+```
+
+
+
+##THE END
